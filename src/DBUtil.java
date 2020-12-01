@@ -112,6 +112,11 @@ public class DBUtil {
 	public Article getRow(String sql, Object...params) {
 		return getRows(sql, params).get(0);
 	}
+	
+	public Comment getCommentRow(String sql, Object...params) {
+		return getCommentRows(sql, params).get(0);
+	}
+	
 	public int updateQuery(String sql, Object... params) {
 		if(params.length != 0 && params[0] instanceof Object[]) {
 			params = (Object[])params[0];

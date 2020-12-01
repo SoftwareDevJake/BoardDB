@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class ArticleDao {
 
-	private DBUtil db = new DBUtil();
+	private DBUtil2 db = new DBUtil2();
 	
 	public ArrayList<Article> getArticles() {
 		String sql = "select * from article";
-		return db.getRows(sql);
+		return db.getRows(sql, new ArticleRowMapper());
 	}
 	
 	public int updateArticle(String title, String body, int aid) {
@@ -26,6 +26,13 @@ public class ArticleDao {
 	
 	public Article getArticleById(int aid) {
 		String sql = "select * from article where id = ?";
-		return db.getRow(sql, aid);
+		return db.getRow(sql, new ArticleRowMapper(), aid);
+	}
+	
+	public ArrayList<Comment> getCommentById(int aid)
+	{
+		String sql = "select * from comments where articleNo = ?";
+		
+		return db.getRows(sql, new CommentRowMapper() ,aid);
 	}
 }
