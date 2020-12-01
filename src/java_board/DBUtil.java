@@ -1,3 +1,5 @@
+package java_board;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -6,14 +8,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DBUtil {
-	// 드라이버 정보
+	// �뱶�씪�씠踰� �젙蹂�
 	String driver = "com.mysql.cj.jdbc.Driver";
-	// dbms 주소p
+	// dbms 二쇱냼p
 	String url = "jdbc:mysql://localhost:3306/t1?serverTimezone=UTC";
 
-	// 사용자 계정
+	// �궗�슜�옄 怨꾩젙
 	String user = "sbsst";
-	// 사용자 비밀번호
+	// �궗�슜�옄 鍮꾨�踰덊샇
 	String pass = "sbs123414";
 
 	Connection conn = null;

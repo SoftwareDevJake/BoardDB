@@ -1,3 +1,4 @@
+package java_board;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -16,9 +17,9 @@ import java.util.ArrayList;
 		String url = "jdbc:mysql://localhost:3306/t1?serverTimezone=UTC";
 
 		// 사용자 계정
-		String user = "sbsst";
+		String user = "root";
 		// 사용자 비밀번호
-		String pass = "sbs123414";
+		String pass = "";
 
 		Connection conn = null;
 
@@ -120,7 +121,6 @@ import java.util.ArrayList;
 			} finally {
 				close(pstmt, conn);
 			}
-			System.out.println(rst);
 			return rst;
 		}
 

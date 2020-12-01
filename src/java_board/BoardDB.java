@@ -1,3 +1,5 @@
+package java_board;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,20 +25,30 @@ public class BoardDB {
 					System.out.println(articles.get(i).getNickname());
 					System.out.println(articles.get(i).getRegDate());
 					System.out.println(articles.get(i).getHit());
+					System.out.println();
 				}
 			} else if(cmd.equals("update")) {
 				System.out.print("수정할 게시물 번호 : ");
 				int aid = Integer.parseInt(sc.nextLine());
 				
-				System.out.print("제목 : ");
-				String title = sc.nextLine();
-				System.out.print("내용 : ");
-				String body = sc.nextLine();
-				articleDao.updateArticle(title, body, aid);
+				if(checkIfExits(aid)) {}
+				
+				else
+				{
+					System.out.print("제목 : ");
+					String title = sc.nextLine();
+					System.out.print("내용 : ");
+					String body = sc.nextLine();
+					articleDao.updateArticle(title, body, aid);
+				}
 			} else if(cmd.equals("delete")) {
 				System.out.print("삭제할 게시물 번호 : ");
 				int aid = Integer.parseInt(sc.nextLine());
-				articleDao.deleteArticle(aid);
+				if(checkIfExits(aid)) {}
+				else
+				{
+					articleDao.deleteArticle(aid);
+				}
 			} else if(cmd.equals("add")) {
 				System.out.print("제목 : ");
 				String title = sc.nextLine();
@@ -48,42 +60,45 @@ public class BoardDB {
 				System.out.print("상세보기할 게시물 번호 : ");
 				int aid = Integer.parseInt(sc.nextLine());
 				
-				printArticle(aid);
-								
-				while(true)
+				if(checkIfExits(aid)) {}
+				else
 				{
-					System.out.print("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 좋아요, 3. 수정, 4. 삭제, 5. 목록으로) : ");
-					int choice = Integer.parseInt(sc.nextLine());
+					printArticle(aid);
+					printComments(aid);
 					
-					if(choice == 1)
+					while(true)
 					{
-//						ArrayList<Comment> comments = commentDao.getComments();
-//						Comment c = commentDao.getCommentById(aid); // aid 는 게시물의 번호
-						System.out.print("댓글 내용을 입력해주세요 : ");
-						String comment = sc.nextLine();
+						System.out.print("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 좋아요, 3. 수정, 4. 삭제, 5. 목록으로) : ");
+						int choice = Integer.parseInt(sc.nextLine());
 						
-						commentDao.insertComment(comment, aid);
-						
-						printArticle(aid);
-						
-						printComments(aid);
-						
-					}
-					else if(choice == 2)
-					{
-						System.out.println("좋아요");
-					}
-					else if(choice == 3)
-					{
-						System.out.println("수정");
-					}
-					else if(choice == 4)
-					{
-						System.out.println("삭제");
-					}
-					else if(choice == 5)
-					{
-						break;
+						if(choice == 1)
+						{
+							System.out.print("댓글 내용을 입력해주세요 : ");
+							String comment = sc.nextLine();
+							
+							commentDao.insertComment(comment, aid);
+							
+							printArticle(aid);
+							
+							printComments(aid);
+							
+						}
+						else if(choice == 2)
+						{
+							System.out.println("좋아요");
+						}
+						else if(choice == 3)
+						{
+							System.out.println("수정");
+						}
+						else if(choice == 4)
+						{
+							System.out.println("삭제");
+						}
+						else if(choice == 5)
+						{
+							break;
+						}
 					}
 				}
 			}
@@ -116,7 +131,7 @@ public class BoardDB {
 				
 				Member member = memberDao.getSignin(id, pass);
 				
-				if(member.getId() == id && member.getPass() == pass)
+				if(member.getId().equals(id) && member.getPass().equals(pass))
 				{
 					System.out.println("로그인 완료!");
 				}
@@ -159,4 +174,17 @@ public class BoardDB {
 		}
 	}
 	
+	public static boolean checkIfExits(int aid)
+	{
+		Article article = articleDao.getArticleById(aid);
+		
+		if(article == null)
+		{
+			System.out.println("게시물이 존재하지 않습니다.");
+			System.out.println("다시 시도해 주세요.");
+			return true;
+		}
+		
+		return false;
+	}
 }

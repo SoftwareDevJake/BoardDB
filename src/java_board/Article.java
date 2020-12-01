@@ -1,3 +1,5 @@
+package java_board;
+
 public class Article {
 
 	private int id;

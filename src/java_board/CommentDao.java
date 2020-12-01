@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package java_board;
 
 public class CommentDao {
 	

@@ -1,3 +1,5 @@
+package java_board;
+
 import java.util.ArrayList;
 
 public class ArticleDao {

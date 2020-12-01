@@ -1,3 +1,5 @@
+package java_board;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

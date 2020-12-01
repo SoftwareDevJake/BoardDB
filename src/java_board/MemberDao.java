@@ -1,3 +1,4 @@
+package java_board;
 
 public class MemberDao {
 	
@@ -12,7 +13,7 @@ public class MemberDao {
 	
 	public Member getSignin(String id, String pass)
 	{
-		String sql = "SELECT id, pass FROM members WHERE id = ?, pass = ?";
+		String sql = "SELECT id, pass FROM members WHERE id = ? AND pass = ?";
 		
 		return db.getRow(sql, new MemberRowMapper(), id, pass);
 	}
