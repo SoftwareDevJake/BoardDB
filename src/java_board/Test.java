@@ -8,35 +8,50 @@ public class Test {
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
+		ArrayList<String> title = new ArrayList<>();
+		ArrayList<String> body = new ArrayList<>();
 		boolean loop = true;
 		Add a = new Add();
 		
+		
 		while(loop)
 		{
-			System.out.print("ëª…ë ¹ì–´ ìž…ë ¥ : ");
+			System.out.print("¸í·É¾î ÀÔ·Â : ");
 			
-			String s = sc.next(); // ìž…ë ¥
+			String s = sc.next(); // ÀÔ·Â
 			
 			
 			if(s.equals("add"))
 			{
-				a.add();
+				//a.add(title, body);
+				System.out.print("°Ô½Ã¹° Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
+				title.add(sc.nextLine());
+				
+				System.out.print("°Ô½Ã¹° ³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
+				body.add(sc.nextLine());
+				
+				System.out.println("°Ô½Ã¹°ÀÌ µî·Ï µÇ¾ú½À´Ï´Ù.");
+				//System.out.println("title = " + title.get() + "body = " + body);
 			}
 			
 			else if(s.equals("list"))
 			{
-				System.out.println("ì œëª© : " + a.title);
-				System.out.println("ë‚´ìš© : " + a.body);
+				//List l = new List(title, body);
+				//l.show_list();
+				for(int i = 0; i < title.size(); i++)
+					{
+						System.out.println("Á¦¸ñ : " + title.get(i));
+						System.out.println("³»¿ë : " + body.get(i));
+					}
 			}
 			
 			else if(s.equals("exit"))
 			{
 				Exit e = new Exit();
-				loop = e.exit(s, loop); // ì¢…ë£Œ
+				loop = e.exit(s, loop); // Á¾·á
 			}
 			
 		}
-		
 		
 		
 		
@@ -49,7 +64,7 @@ class Exit {
 	{
 		if(s.equals("exit"))
 		{
-			System.out.println("ì¢…ë£Œ");
+			System.out.println("Á¾·á");
 			loop = false;
 		}
 		return loop;
@@ -57,27 +72,38 @@ class Exit {
 }
 
 class Add {
-	String title;
-	String body;
+//	String title;
+//	String body;
 	Scanner sc2 = new Scanner(System.in);
 	
-	void add ()
+	void add (String title, String body)
 	{
-		System.out.print("ê²Œì‹œë¬¼ ì œëª©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš” : ");
-		title = sc2.next();
+		System.out.print("°Ô½Ã¹° Á¦¸ñÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
+		title = sc2.nextLine();
 		
-		System.out.print("ê²Œì‹œë¬¼ ë‚´ìš©ì„ ìž…ë ¥í•´ì£¼ì„¸ìš” : ");
-		body = sc2.next();
+		System.out.print("°Ô½Ã¹° ³»¿ëÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
+		body = sc2.nextLine();
 		
-		System.out.println("ê²Œì‹œë¬¼ì´ ë“±ë¡ ë˜ì—ˆìŠµë‹ˆë‹¤.");
+		System.out.println("°Ô½Ã¹°ÀÌ µî·Ï µÇ¾ú½À´Ï´Ù.");
 	}
 }
 
-class List {
-	ArrayList list = new ArrayList();
-	
-	void show_list()
-	{
-		
-	}
-}
+//class List {
+//	ArrayList<String> title = new ArrayList<>();
+//	ArrayList<String> body = new ArrayList<>();
+//	List(String t, String s)
+//	{
+//		title.add(t);
+//		body.add(s);
+//		
+//	}
+//	
+//	void show_list()
+//	{
+//		for(int i = 0; i < title.size(); i++)
+//		{
+//			System.out.println("Á¦¸ñ : " + title.get(i));
+//			System.out.println("³»¿ë : " + body.get(i));
+//		}
+//	}
+//}
