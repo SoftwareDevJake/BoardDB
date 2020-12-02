@@ -12,14 +12,16 @@ public class ArticleRowMapper implements RowMapper<Article> {
 		String title = rs.getString("title");
 		int id = rs.getInt("id");
 		String body = rs.getString("body");
-		String nickname = rs.getString("nickname");
+		String regDate = rs.getString("regDate");
 		int hit = rs.getInt("hit");
+		int memberNum = rs.getInt("memberNum");
 
 		article.setTitle(title);
 		article.setBody(body);
-		article.setNickname(nickname);
 		article.setId(id);
+		article.setRegDate(regDate);
 		article.setHit(hit);
+		article.setMemberNum(memberNum);
 		
 		return article;
 	}
