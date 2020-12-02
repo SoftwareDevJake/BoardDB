@@ -21,9 +21,9 @@ public class ArticleDao {
 		return db.updateQuery(sql, aid);
 	}
 	
-	public int insertArticle(String title, String body) {
-		String sql = "insert into article set title = ?, body = ?, nickname = '익명', regDate = NOW(), hit = 0";
-		return db.updateQuery(sql, title, body);
+	public int insertArticle(String title, String body, int memberNum) {
+		String sql = "insert into article set title = ?, body = ?, regDate = NOW(), hit = 0, memberNum = ?";
+		return db.updateQuery(sql, title, body, memberNum);
 	}
 	
 	public Article getArticleById(int aid) {

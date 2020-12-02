@@ -4,22 +4,30 @@ public class Article {
 
 	private int id;
 	private String title;
-	private String nickname;
 	private String body;
 	private String regDate;
 	private int hit;
+	private int memberNum;
 
 	public Article() {
 
 	}
 	
-	public Article(int id, String title, String nickname, String body, String regDate, int hit) {
+	public Article(int id, String title, String body, String regDate, int hit, int memberNum) {
 		this.id = id;
 		this.title = title;
-		this.nickname = nickname;
 		this.body = body;
 		this.regDate = regDate;
 		this.hit = hit;
+		this.memberNum = memberNum;
+	}
+
+	public int getMemberNum() {
+		return memberNum;
+	}
+
+	public void setMemberNum(int memberNum) {
+		this.memberNum = memberNum;
 	}
 
 	public int getId() {
@@ -36,14 +44,6 @@ public class Article {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
 	}
 
 	public String getBody() {
