@@ -4,20 +4,25 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BoardDB {
+	
 	static ArticleDao articleDao = new ArticleDao();
 	static CommentDao commentDao = new CommentDao();
 	static MemberDao memberDao = new MemberDao();
 	static DBUtil2 db = new DBUtil2();
+	
 	public static void main(String[] args) {
 		
-
 		Scanner sc = new Scanner(System.in);
 
 		while (true) {
 			System.out.print("명령어를 입력해주세요 : ");
 			String cmd = sc.nextLine();
-			if(cmd.equals("list")) {
+			
+			if(cmd.equals("list")) 
+			{
+				
 				ArrayList<Article> articles = articleDao.getArticles();
+				
 				for(int i = 0; i < articles.size(); i++)
 				{
 					System.out.println(articles.get(i).getTitle());
@@ -27,7 +32,9 @@ public class BoardDB {
 					System.out.println(articles.get(i).getHit());
 					System.out.println();
 				}
-			} else if(cmd.equals("update")) {
+			} 
+			else if(cmd.equals("update")) 
+			{
 				System.out.print("수정할 게시물 번호 : ");
 				int aid = Integer.parseInt(sc.nextLine());
 				
@@ -41,7 +48,9 @@ public class BoardDB {
 					String body = sc.nextLine();
 					articleDao.updateArticle(title, body, aid);
 				}
-			} else if(cmd.equals("delete")) {
+			} 
+			else if(cmd.equals("delete")) 
+			{
 				System.out.print("삭제할 게시물 번호 : ");
 				int aid = Integer.parseInt(sc.nextLine());
 				if(checkIfExits(aid)) {}
@@ -49,14 +58,18 @@ public class BoardDB {
 				{
 					articleDao.deleteArticle(aid);
 				}
-			} else if(cmd.equals("add")) {
+			}
+			else if(cmd.equals("add")) 
+			{
 				System.out.print("제목 : ");
 				String title = sc.nextLine();
 				System.out.print("내용 : ");
 				String body = sc.nextLine();
 				
 				articleDao.insertArticle(title, body);
-			} else if(cmd.equals("read")) {
+			} 
+			else if(cmd.equals("read")) 
+			{
 				System.out.print("상세보기할 게시물 번호 : ");
 				int aid = Integer.parseInt(sc.nextLine());
 				
@@ -79,9 +92,7 @@ public class BoardDB {
 							commentDao.insertComment(comment, aid);
 							
 							printArticle(aid);
-							
 							printComments(aid);
-							
 						}
 						else if(choice == 2)
 						{
@@ -140,9 +151,7 @@ public class BoardDB {
 				{
 					System.out.println("다시 시도해 주십시오.");
 				}
-				
 			}
-			
 		}
 	}
 	
@@ -166,6 +175,7 @@ public class BoardDB {
 		for(int i = 0; i < comments.size(); i++)
 		{
 //			해당 게시물의 댓글 찾아서 프린트
+			System.out.println();
 			System.out.println("번호 : " + comments.get(i).getId());
 			System.out.println("내용 : " + comments.get(i).getComment());
 			System.out.println("장성자 : " + comments.get(i).getNickname());
