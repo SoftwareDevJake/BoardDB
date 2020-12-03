@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class App {
 	Scanner sc = new Scanner(System.in);
 	MemberDao memberDao = new MemberDao();
-	ArticleDao articleDao = new ArticleDao();
 	ArticleFunc articleFunc = new ArticleFunc();
 	MemberFunc memberFunc = new MemberFunc();
 	Print print = new Print();
@@ -41,7 +40,7 @@ public class App {
 				}
 			} else if(cmd.equals("article delete")) { // 게시물 삭제
 				if(ifs.ifSignin(memberNum)){
-					articleFunc.articleDelete();
+					articleFunc.articleDelete(memberNum);
 				} else{
 					System.out.println("로그인 후 이용 가능합니다.");
 				}

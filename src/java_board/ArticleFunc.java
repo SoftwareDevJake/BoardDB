@@ -35,15 +35,15 @@ public class ArticleFunc {
 		article = articleDao.getArticleById(aid);
 		member = memberDao.getSigninWithNum(memberNum);
 		
-		if(ifs.checkIfExits(aid)) {}
+		if(ifs.checkIfNotExits(aid)) {}
 		
 		else
 		{
 			if(ifs.ifRightUser(article, member, memberNum, aid))
 			{
-				System.out.print("제목 : ");
+				System.out.print("수정할 제목 : ");
 				String title = sc.nextLine();
-				System.out.print("내용 : ");
+				System.out.print("수정할 내용 : ");
 				String body = sc.nextLine();
 				articleDao.updateArticle(title, body, aid);
 			}
@@ -54,14 +54,17 @@ public class ArticleFunc {
 		}
 	}
 	
-	public void articleDelete()
+	public void articleDelete(int memberNum)
 	{
 		System.out.print("삭제할 게시물 번호 : ");
 		int aid = Integer.parseInt(sc.nextLine());
-		if(ifs.checkIfExits(aid)) {}
-		else
+		if(ifs.ifRightUser(article, member, memberNum, aid))
 		{
 			articleDao.deleteArticle(aid);
+		}
+		else
+		{
+			System.out.println("자신의 게시물만 삭제 할 수 있습니다.");
 		}
 	}
 	
@@ -70,7 +73,10 @@ public class ArticleFunc {
 		System.out.print("상세보기할 게시물 번호 : ");
 		int aid = Integer.parseInt(sc.nextLine());
 		
-		if(ifs.checkIfExits(aid)) {}
+		article = articleDao.getArticleById(aid);
+		member = memberDao.getSigninWithNum(aid);
+		
+		if(ifs.checkIfNotExits(aid)) {}
 		else
 		{
 			print.printArticle(aid);
@@ -108,8 +114,6 @@ public class ArticleFunc {
 				}
 				else if(choice == 3)
 				{
-					article = articleDao.getArticleById(aid);
-					member = memberDao.getSigninWithNum(aid);
 					if(ifs.ifRightUser(article, member, memberNum, aid))
 					{
 						System.out.print("수정할 제목을 입력해 주십시오 : ");
@@ -127,7 +131,8 @@ public class ArticleFunc {
 				}
 				else if(choice == 4)
 				{
-					System.out.println("삭제");
+					articleDao.deleteArticle(aid);
+					System.out.println("삭제 되었습니다.");
 				}
 				else if(choice == 5)
 				{

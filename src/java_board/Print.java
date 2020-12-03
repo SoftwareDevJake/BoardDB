@@ -19,6 +19,7 @@ public class Print {
 
 		for(int i = 0; i < articles.size(); i++)
 		{
+			System.out.println("id : " + articles.get(i).getId());
 			System.out.println("title : " + articles.get(i).getTitle());
 			System.out.println("body : " + articles.get(i).getBody());
 			System.out.println("nickname : " + members.get(articles.get(i).getMemberNum()).getNickname());

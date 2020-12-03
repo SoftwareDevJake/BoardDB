@@ -5,7 +5,7 @@ public class If {
 	ArticleDao articleDao = new ArticleDao();
 	MemberDao memberDao = new MemberDao();
 	
-	public boolean checkIfExits(int aid)
+	public boolean checkIfNotExits(int aid)
 	{
 		Article article = articleDao.getArticleById(aid);
 		
@@ -34,8 +34,9 @@ public class If {
 	public boolean ifRightUser(Article article, Member member, int memberNum, int aid)
 	{
 		article = articleDao.getArticleById(aid);
+		member = memberDao.getSigninWithNum(memberNum);
 
-		if(article.getMemberNum() == memberNum)
+		if(article.getMemberNum() == member.getNum())
 		{
 			return true;
 		}
