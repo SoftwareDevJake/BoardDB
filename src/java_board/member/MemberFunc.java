@@ -13,7 +13,7 @@ public class MemberFunc {
 	ArrayList<Member> members = new ArrayList<>();
 	If ifs = new If();
 	
-	public void memberSignup()
+	public ArrayList<Member> memberSignup()
 	{
 		System.out.print("회원 아이디를 입력해 주세요 : ");
 		String id = sc.nextLine();
@@ -29,25 +29,31 @@ public class MemberFunc {
 		memberDao.insertSignin(id, pass, nickname);
 		
 		members = memberDao.getSignins();
+		
+		System.out.println("1멤버 리스트 추가 확인 : " + members.size());
+		
 		members.add(member);
+		members = memberDao.getSignins();
+		System.out.println("2멤버 리스트 추가 확인 : " + members.size());
+		
+		return members;
 	}
 	
-	public int memberSignin(int memberNum)
+	public ArrayList<Member> memberSignin(int memberNum)
 	{
 		members = memberDao.getSignins();
-		
 		System.out.print("로그인 아이디를 입력해 주세요 : ");
 		String id = sc.nextLine();
 		
 		System.out.print("로그인 비밀번호를 입력해 주세요 : ");
 		String pass = sc.nextLine();
-		
+		System.out.println("5멤버 리스트 추가 확인 : " + members.size());
 		member = memberDao.getSignin(id, pass);
 		
 		if(member == null)
 		{
 			System.out.println("다시 시도해 주십시오.");
-			return memberNum;
+			return members;
 		}
 		
 		else
@@ -56,32 +62,31 @@ public class MemberFunc {
 			{
 				System.out.println("로그인 완료!");
 				System.out.println(member.getNickname() + "님 환영합니다!");
-				memberNum = member.getNum();
-				members.add(member);
+				System.out.println("6멤버 리스트 추가 확인 : " + members.size());
 				
-				members = memberDao.getSignins();
-				
-				return memberNum;
+				return members;
 			}
 			else
 			{
 				System.out.println("다시 시도해 주십시오.");
-				return memberNum;
+				return members;
 			}
 		}
 	}
 	
-	public void memberLogout(int memberNum)
+	public int memberLogout(int memberNum)
 	{
 		if(ifs.ifSignin(memberNum))
 		{
 			System.out.println("로그아웃 되셨습니다.");
 			memberNum = -1;
+			return memberNum;
 		}
 	
 		else
 		{
 			System.out.println("로그인 후 이용 가능합니다.");
+			return memberNum;
 		}
 	}
 	

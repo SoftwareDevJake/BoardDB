@@ -1,10 +1,10 @@
 package java_board;
 
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import java_board.article.Article;
+import java_board.article.ArticleDao;
 import java_board.article.ArticleFunc;
 import java_board.member.Member;
 import java_board.member.MemberDao;
@@ -13,23 +13,34 @@ import java_board.member.MemberFunc;
 public class App {
 	Scanner sc = new Scanner(System.in);
 	MemberDao memberDao = new MemberDao();
+	ArticleDao articleDao = new ArticleDao();
 	ArticleFunc articleFunc = new ArticleFunc();
 	MemberFunc memberFunc = new MemberFunc();
 	Print print = new Print();
 	If ifs = new If();
-	int memberNum = -1;
 	Member member = new Member();
 	Article article = new Article();
 	
-	ArrayList<Member> members = memberDao.getSignins();
+
+	
+	ArrayList<Member> members = new ArrayList<>();
 	
 	public void start()
 	{
 		
+		int memberNum = -1;
+		int memberIndex = -1;
+		
+		
 		while (true) {
-			if(ifs.ifSignin(memberNum)){
-				System.out.print("명령어를 입력해주세요 [" + members.get(memberNum).getId() + "(" + members.get(memberNum).getNickname() + ")] : ");
-			} else{
+			
+			if(ifs.ifSignin(memberNum)) {
+				memberNum = member.getNum(); // member 고유 넘버
+				memberIndex = memberNum - 1; // member index 넘버
+				members = memberDao.getSignins();
+				
+				System.out.print("명령어를 입력해주세요 [" + members.get(memberIndex).getId() + "(" + members.get(memberIndex).getNickname() + ")] : ");
+			} else {
 				System.out.print("명령어를 입력해주세요 : ");
 			}
 			
@@ -59,11 +70,14 @@ public class App {
 			} else if(cmd.equals("article read")) { // 게시물 상세 읽기
 				articleFunc.articleRead(memberNum);
 			} else if(cmd.equals("member sign up")) { // 회원가입
-				memberFunc.memberSignup();
+				members = memberFunc.memberSignup();
+				System.out.println("3멤버 리스트 추가 확인 : " + members.size());
 			} else if(cmd.equals("member sign in")) { // 로그인
-				memberNum = memberFunc.memberSignin(memberNum);
+				members = memberFunc.memberSignin(memberNum);
+				System.out.println("3멤버 리스트 추가 확인 : " + members.size());
+				memberNum = member.getNum();
 			} else if(cmd.equals("member log out")) { // 로그아웃
-				memberFunc.memberLogout(memberNum);
+				memberNum = memberFunc.memberLogout(memberNum);
 			} else if(cmd.equals("exit")) { // 종료
 				System.out.println("종료 되었습니다.");
 				break;

@@ -24,9 +24,9 @@ public class If {
 		return false;
 	}
 	
-	public boolean ifSignin(int memberNum)
+	public boolean ifSignin(int memberId)
 	{
-		if(memberNum >= 0)
+		if(memberId >= 0)
 		{
 			return true;
 		}
