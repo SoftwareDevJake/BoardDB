@@ -1,5 +1,10 @@
 package java_board;
 
+import java_board.article.Article;
+import java_board.article.ArticleDao;
+import java_board.member.Member;
+import java_board.member.MemberDao;
+
 public class If {
 	
 	ArticleDao articleDao = new ArticleDao();

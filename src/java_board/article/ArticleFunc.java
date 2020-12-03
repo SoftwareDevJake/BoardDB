@@ -1,7 +1,13 @@
-package java_board;
+package java_board.article;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import java_board.If;
+import java_board.Print;
+import java_board.comment.CommentDao;
+import java_board.member.Member;
+import java_board.member.MemberDao;
 
 public class ArticleFunc {
 	
@@ -24,7 +30,7 @@ public class ArticleFunc {
 		String body = sc.nextLine();
 		
 		
-		articleDao.insertArticle(title, body, memberNum);
+		articleDao.insertArticle(title, body, memberNum, 0);
 	}
 	
 	public void updateArticle(int memberNum)
@@ -77,17 +83,22 @@ public class ArticleFunc {
 		member = memberDao.getSigninWithNum(aid);
 		
 		if(ifs.checkIfNotExits(aid)) {}
+		member = memberDao.getSigninWithNum(memberNum + 1);
+		
+		articleDao.hit(article.getHit() + 1, aid);
+		article = articleDao.getArticleById(aid);
+		
+		if(ifs.checkIfNotExits(aid)) {}
 		else
 		{
-			print.printArticle(aid);
-			print.printComments(aid);
+			print.printArticle(article, member);
+			print.printComments(article);
 			
 			while(true)
 			{
 				if(ifs.ifSignin(memberNum))
 				{
 					System.out.print("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 좋아요, 3. 수정, 4. 삭제, 5. 목록으로) : ");
-					
 				}
 				
 				else
@@ -102,15 +113,16 @@ public class ArticleFunc {
 				{
 					System.out.print("댓글 내용을 입력해주세요 : ");
 					String comment = sc.nextLine();
-					member = memberDao.getSigninWithNum(memberNum);
+					member = memberDao.getSigninWithNum(memberNum + 1);
 					commentDao.insertComment(comment, aid, member.getNickname());
 					
-					print.printArticle(aid);
-					print.printComments(aid);
+					print.printArticle(article,member);
+					print.printComments(article);
 				}
 				else if(choice == 2)
 				{
-					System.out.println("좋아요");
+					
+					System.out.println("해당 게시물을 좋아합니다.");
 				}
 				else if(choice == 3)
 				{

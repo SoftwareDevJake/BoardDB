@@ -1,6 +1,10 @@
-package java_board;
+package java_board.article;
 
 import java.util.ArrayList;
+
+import java_board.DBUtil2;
+import java_board.comment.Comment;
+import java_board.comment.CommentRowMapper;
 
 public class ArticleDao {
 
@@ -21,9 +25,9 @@ public class ArticleDao {
 		return db.updateQuery(sql, aid);
 	}
 	
-	public int insertArticle(String title, String body, int memberNum) {
-		String sql = "insert into article set title = ?, body = ?, regDate = NOW(), hit = 0, memberNum = ?";
-		return db.updateQuery(sql, title, body, memberNum);
+	public int insertArticle(String title, String body, int memberNum, int hit) {
+		String sql = "insert into article set title = ?, body = ?, regDate = NOW(), hit = ?, memberNum = ?";
+		return db.updateQuery(sql, title, body, hit, memberNum);
 	}
 	
 	public Article getArticleById(int aid) {
@@ -36,5 +40,12 @@ public class ArticleDao {
 		String sql = "select * from comments where articleNo = ?";
 		
 		return db.getRows(sql, new CommentRowMapper() ,aid);
+	}
+	
+	public int hit(int hit, int aid)
+	{
+		String sql = "UPDATE article SET hit = ? WHERE id = ?";
+		
+		return db.updateQuery(sql, hit, aid);
 	}
 }

@@ -1,4 +1,6 @@
-package java_board;
+package java_board.comment;
+
+import java_board.DBUtil2;
 
 public class CommentDao {
 	

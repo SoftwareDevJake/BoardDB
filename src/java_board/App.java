@@ -1,7 +1,14 @@
 package java_board;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import java_board.article.Article;
+import java_board.article.ArticleFunc;
+import java_board.member.Member;
+import java_board.member.MemberDao;
+import java_board.member.MemberFunc;
 
 public class App {
 	Scanner sc = new Scanner(System.in);
@@ -10,7 +17,6 @@ public class App {
 	MemberFunc memberFunc = new MemberFunc();
 	Print print = new Print();
 	If ifs = new If();
-	int aid = -1;
 	int memberNum = -1;
 	Member member = new Member();
 	Article article = new Article();

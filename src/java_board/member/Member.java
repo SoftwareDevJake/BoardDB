@@ -1,4 +1,4 @@
-package java_board;
+package java_board.member;
 
 public class Member {
 	
@@ -7,7 +7,7 @@ public class Member {
 	private String nickname;
 	private int num;
 	
-	Member()
+	public Member()
 	{
 		
 	}
