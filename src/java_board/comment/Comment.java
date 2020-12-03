@@ -1,4 +1,4 @@
-package java_board;
+package java_board.comment;
 
 public class Comment {
 	
@@ -21,8 +21,7 @@ public class Comment {
 		
 	}
 	
-	public Comment(int id, String comment, String nickname, String regDate, int articleNo) {
-		this.id = id;
+	public Comment(String comment, String nickname, String regDate, int articleNo) {
 		this.comment = comment;
 		this.nickname = nickname;
 		this.regDate = regDate;

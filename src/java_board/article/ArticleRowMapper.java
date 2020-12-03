@@ -1,7 +1,9 @@
-package java_board;
+package java_board.article;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import java_board.RowMapper;
 
 public class ArticleRowMapper implements RowMapper<Article> {
 

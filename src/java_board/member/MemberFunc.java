@@ -1,7 +1,9 @@
-package java_board;
+package java_board.member;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import java_board.If;
 
 public class MemberFunc {
 
@@ -25,6 +27,9 @@ public class MemberFunc {
 		String nickname = sc.nextLine();
 		
 		memberDao.insertSignin(id, pass, nickname);
+		
+		members = memberDao.getSignins();
+		members.add(member);
 	}
 	
 	public int memberSignin(int memberNum)
@@ -39,19 +44,30 @@ public class MemberFunc {
 		
 		member = memberDao.getSignin(id, pass);
 		
-		if(member.getId().equals(id) && member.getPass().equals(pass))
-		{
-			System.out.println("로그인 완료!");
-			System.out.println(member.getNickname() + "님 환영합니다!");
-			memberNum = member.getNum();
-			members.add(member);
-			
-			return memberNum-1;
-		}
-		else
+		if(member == null)
 		{
 			System.out.println("다시 시도해 주십시오.");
 			return memberNum;
+		}
+		
+		else
+		{
+			if(member.getId().equals(id) && member.getPass().equals(pass))
+			{
+				System.out.println("로그인 완료!");
+				System.out.println(member.getNickname() + "님 환영합니다!");
+				memberNum = member.getNum();
+				members.add(member);
+				
+				members = memberDao.getSignins();
+				
+				return memberNum;
+			}
+			else
+			{
+				System.out.println("다시 시도해 주십시오.");
+				return memberNum;
+			}
 		}
 	}
 	

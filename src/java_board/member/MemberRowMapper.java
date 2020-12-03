@@ -1,7 +1,9 @@
-package java_board;
+package java_board.member;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import java_board.RowMapper;
 
 public class MemberRowMapper implements RowMapper<Member> {
 	

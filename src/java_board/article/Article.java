@@ -1,4 +1,4 @@
-package java_board;
+package java_board.article;
 
 public class Article {
 

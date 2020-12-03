@@ -1,6 +1,8 @@
-package java_board;
+package java_board.member;
 
 import java.util.ArrayList;
+
+import java_board.DBUtil2;
 
 public class MemberDao {
 	

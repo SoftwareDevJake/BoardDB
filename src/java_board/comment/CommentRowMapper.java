@@ -1,7 +1,9 @@
-package java_board;
+package java_board.comment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import java_board.RowMapper;
 
 public class CommentRowMapper implements RowMapper<Comment> {
 	

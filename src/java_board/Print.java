@@ -2,6 +2,12 @@ package java_board;
 
 import java.util.ArrayList;
 
+import java_board.article.Article;
+import java_board.article.ArticleDao;
+import java_board.comment.Comment;
+import java_board.member.Member;
+import java_board.member.MemberDao;
+
 public class Print {
 	
 	ArticleDao articleDao = new ArticleDao();
@@ -28,13 +34,10 @@ public class Print {
 		}
 	}
 	
-	public void printArticle(int aid)
-	{
-		article = articleDao.getArticleById(aid);
-		member = memberDao.getSigninWithNum(aid);
-		
+	public void printArticle(Article article, Member member)
+	{	
 		System.out.println();
-		System.out.println("=====" + aid + "번 게시물 =====");
+		System.out.println("=====" + article.getId() + "번 게시물 =====");
 		System.out.println(article.getTitle());
 		System.out.println(article.getBody());
 		System.out.println(member.getNickname());
@@ -43,9 +46,8 @@ public class Print {
 		System.out.println("==================");
 	}
 	
-	public void printComments(int aid)
+	public void printComments(Article article)
 	{
-		article = articleDao.getArticleById(aid);
 		comments = articleDao.getCommentById(article.getId());
 		for(int i = 0; i < comments.size(); i++)
 		{
