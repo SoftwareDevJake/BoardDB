@@ -67,6 +67,7 @@ public class ArticleFunc {
 		if(ifs.ifRightUser(article, member, memberNum, aid))
 		{
 			articleDao.deleteArticle(aid);
+			System.out.println("삭제 되었습니다.");
 		}
 		else
 		{
@@ -79,18 +80,14 @@ public class ArticleFunc {
 		System.out.print("상세보기할 게시물 번호 : ");
 		int aid = Integer.parseInt(sc.nextLine());
 		
-		article = articleDao.getArticleById(aid);
-		member = memberDao.getSigninWithNum(aid);
-		
-		if(ifs.checkIfNotExits(aid)) {}
-		member = memberDao.getSigninWithNum(memberNum + 1);
-		
 		articleDao.hit(article.getHit() + 1, aid);
 		article = articleDao.getArticleById(aid);
 		
 		if(ifs.checkIfNotExits(aid)) {}
 		else
 		{
+			member = memberDao.getSigninWithNum(memberNum);
+			
 			print.printArticle(article, member);
 			print.printComments(article);
 			
@@ -113,10 +110,9 @@ public class ArticleFunc {
 				{
 					System.out.print("댓글 내용을 입력해주세요 : ");
 					String comment = sc.nextLine();
-					member = memberDao.getSigninWithNum(memberNum + 1);
 					commentDao.insertComment(comment, aid, member.getNickname());
 					
-					print.printArticle(article,member);
+					print.printArticle(article, member);
 					print.printComments(article);
 				}
 				else if(choice == 2)
@@ -145,12 +141,73 @@ public class ArticleFunc {
 				{
 					articleDao.deleteArticle(aid);
 					System.out.println("삭제 되었습니다.");
+					break;
 				}
 				else if(choice == 5)
 				{
 					break;
 				}
 			}
+		}
+	}
+	
+	public void articleSearch()
+	{
+		System.out.print("검색 항목을 선택해주세요 (1. 제목, 2. 내용, 3. 제목 + 내용, 4. 작성자) : ");
+		int choice = Integer.parseInt(sc.nextLine());
+		
+		if(choice == 1)
+		{
+			System.out.print("제목 검색 키워드를 입력해주세요 : ");
+			String keyword = sc.nextLine();
+			
+			article = articleDao.getArticleSearchByTitle(keyword);
+			member = memberDao.getSigninWithNum(article.getMemberNum()-1);
+			
+			print.printArticle(article, member);
+			print.printComments(article);
+		}
+		
+		else if(choice == 2)
+		{
+			System.out.print("내용 검색 키워드를 입력해주세요 : ");
+			String keyword = sc.nextLine();
+			
+			article = articleDao.getArticleSearchByBody(keyword);
+			member = memberDao.getSigninWithNum(article.getMemberNum()-1);
+			
+			print.printArticle(article, member);
+			print.printComments(article);
+		}
+		
+		else if(choice == 3)
+		{
+			System.out.print("제목 + 내용 검색 키워드를 입력해주세요 : ");
+			String keyword = sc.nextLine();
+			
+			article = articleDao.getArticleSearchByTitleAndBody(keyword);
+			member = memberDao.getSigninWithNum(article.getMemberNum()-1);
+			
+			print.printArticle(article, member);
+			print.printComments(article);
+
+		}
+		
+		else if(choice == 4)
+		{
+			System.out.print("작성자 검색 키워드를 입력해주세요 : ");
+			String keyword = sc.nextLine();
+			
+			article = articleDao.getArticleSearchByNickname(keyword);
+			member = memberDao.getSigninWithNum(article.getMemberNum()-1);
+			
+			print.printArticle(article, member);
+			print.printComments(article);
+		}
+		
+		else
+		{
+			System.out.println("다시 입력해 주세요.");
 		}
 	}
 }

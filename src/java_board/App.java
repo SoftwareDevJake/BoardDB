@@ -37,7 +37,6 @@ public class App {
 			if(ifs.ifSignin(memberNum)) {
 				memberNum = member.getNum(); // member 고유 넘버
 				memberIndex = memberNum - 1; // member index 넘버
-				members = memberDao.getSignins();
 				
 				System.out.print("명령어를 입력해주세요 [" + members.get(memberIndex).getId() + "(" + members.get(memberIndex).getNickname() + ")] : ");
 			} else {
@@ -69,15 +68,20 @@ public class App {
 				}
 			} else if(cmd.equals("article read")) { // 게시물 상세 읽기
 				articleFunc.articleRead(memberNum);
+			} else if(cmd.equals("article search")) { // 게시물 검색
+				articleFunc.articleSearch();
 			} else if(cmd.equals("member sign up")) { // 회원가입
 				members = memberFunc.memberSignup();
 				System.out.println("3멤버 리스트 추가 확인 : " + members.size());
 			} else if(cmd.equals("member sign in")) { // 로그인
-				members = memberFunc.memberSignin(memberNum);
-				System.out.println("3멤버 리스트 추가 확인 : " + members.size());
+				members = memberDao.getSignins();
+				member = memberFunc.memberSignin(members);
+				System.out.println("4멤버 리스트 추가 확인 : " + members.size());
 				memberNum = member.getNum();
 			} else if(cmd.equals("member log out")) { // 로그아웃
 				memberNum = memberFunc.memberLogout(memberNum);
+			} else if (cmd.equals("member info")) {
+				memberFunc.memberInfo();
 			} else if(cmd.equals("exit")) { // 종료
 				System.out.println("종료 되었습니다.");
 				break;

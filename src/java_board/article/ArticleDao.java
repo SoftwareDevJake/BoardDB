@@ -48,4 +48,32 @@ public class ArticleDao {
 		
 		return db.updateQuery(sql, hit, aid);
 	}
+	
+	public Article getArticleSearchByTitle(String keyword)
+	{
+		String sql = "select * from article where title like '%' || ? || '%'";
+		SELECT CONCAT_WS('a','%','%');
+		return db.getRow(sql, new ArticleRowMapper(), keyword);
+	}
+	
+	public Article getArticleSearchByBody(String keyword)
+	{
+		String sql = "select * from article where body like '%' || ? || '%'";
+		
+		return db.getRow(sql, new ArticleRowMapper(), keyword);
+	}
+	
+	public Article getArticleSearchByTitleAndBody(String keyword)
+	{
+		String sql = "select * from article where title like '%' || ? || '%' or body like '%' || ? || '%'";
+		
+		return db.getRow(sql, new ArticleRowMapper(), keyword, keyword);
+	}
+	
+	public Article getArticleSearchByNickname(String keyword)
+	{
+		String sql = "select * from article where nickname like '%' || ? || '%'";
+		
+		return db.getRow(sql, new ArticleRowMapper(), keyword);
+	}
 }

@@ -32,16 +32,13 @@ public class MemberFunc {
 		
 		System.out.println("1멤버 리스트 추가 확인 : " + members.size());
 		
-		members.add(member);
-		members = memberDao.getSignins();
 		System.out.println("2멤버 리스트 추가 확인 : " + members.size());
 		
 		return members;
 	}
 	
-	public ArrayList<Member> memberSignin(int memberNum)
+	public Member memberSignin(ArrayList<Member> members)
 	{
-		members = memberDao.getSignins();
 		System.out.print("로그인 아이디를 입력해 주세요 : ");
 		String id = sc.nextLine();
 		
@@ -53,7 +50,7 @@ public class MemberFunc {
 		if(member == null)
 		{
 			System.out.println("다시 시도해 주십시오.");
-			return members;
+			return member;
 		}
 		
 		else
@@ -64,12 +61,12 @@ public class MemberFunc {
 				System.out.println(member.getNickname() + "님 환영합니다!");
 				System.out.println("6멤버 리스트 추가 확인 : " + members.size());
 				
-				return members;
+				return member;
 			}
 			else
 			{
 				System.out.println("다시 시도해 주십시오.");
-				return members;
+				return member;
 			}
 		}
 	}
@@ -90,4 +87,19 @@ public class MemberFunc {
 		}
 	}
 	
+	public void memberInfo()
+	{
+		members = memberDao.getSignins();
+		
+		for(int i = 0; i < members.size(); i++)
+		{
+			System.out.println();
+			System.out.println("Member id : " + members.get(i).getId());
+			System.out.println("Member pass : " + members.get(i).getPass());
+			System.out.println("Member nickname : " + members.get(i).getNickname());
+			System.out.println("Member num : " + members.get(i).getNum());
+		}
+		System.out.println("Members size : " + members.size());
+		System.out.println();
+	}
 }

@@ -28,7 +28,7 @@ public class Print {
 			System.out.println("id : " + articles.get(i).getId());
 			System.out.println("title : " + articles.get(i).getTitle());
 			System.out.println("body : " + articles.get(i).getBody());
-			System.out.println("nickname : " + members.get(articles.get(i).getMemberNum()).getNickname());
+			System.out.println("nickname : " + members.get(articles.get(i).getMemberNum()-1).getNickname());
 			System.out.println("date : " + articles.get(i).getRegDate());
 			System.out.println("hit : " + articles.get(i).getHit());
 			System.out.println();
@@ -37,13 +37,14 @@ public class Print {
 	
 	public void printArticle(Article article, Member member)
 	{	
+		member = memberDao.getSigninWithNum(article.getMemberNum());
 		System.out.println();
 		System.out.println("=====" + article.getId() + "번 게시물 =====");
-		System.out.println(article.getTitle());
-		System.out.println(article.getBody());
-		System.out.println(member.getNickname());
-		System.out.println(article.getRegDate());
-		System.out.println(article.getHit());
+		System.out.println("title : " + article.getTitle());
+		System.out.println("body : " + article.getBody());
+		System.out.println("nickname : " + member.getNickname());
+		System.out.println("regDate : " + article.getRegDate());
+		System.out.println("hit : " + article.getHit());
 		System.out.println("==================");
 	}
 	
